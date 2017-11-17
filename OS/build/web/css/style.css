@@ -1,0 +1,246 @@
+html, body {
+    font-family: monospace;
+    background: #fafafa;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h3 span {
+    color: #d5d5d5;
+}
+
+h4 span {
+    cursor:pointer;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul {
+    margin-left: 10px;
+}
+
+label {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    padding: 2px 5px 2px 2px;
+    border-radius: 10px;
+    font-weight: 100;
+}
+
+input[type=radio] {
+    margin: 2px 4px;
+}
+
+.scalable label:hover {
+    transform: scale(1.05);
+}
+
+.panel-heading {
+    border: 1px red solid;
+    font-size: 1.5em;
+}
+
+.headertext {
+    margin: 10px;
+    text-align: center;
+    font: 20pt monospace;
+}
+
+align_left {
+    float: left;
+}
+
+.align_right {
+    float: right;
+}
+
+.logo {
+    color: #e6e6e6;
+    letter-spacing: -10px;
+    margin-bottom: 0;
+    font: 800 120px Tahoma;
+}
+
+.bold  {
+    font-weight: 900;
+}
+
+tr td {
+    text-align: center;
+}
+
+.header {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+hr {
+    color: #eee; /*для IE */
+    background-color: #eee; /*для Firefox, Opera, Safari*/
+    border:0px none;
+    height:1px; /* высота 1px IE, Firefox, Opera, Safari */
+    clear:both; /* для очистки, если тег идет после float елемента */
+}
+
+#month {
+    font-size: 16px;
+}
+
+.containerIndex .panel-body {
+    height: 670px;
+    overflow: auto;
+    /*background-color: rgba(255, 255, 255, 0.5);
+*/}
+
+.containerIndex {
+    width: 1314px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.containerEdit {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.containerDownload {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+#date, #time, #candidates {
+    float: left;
+    padding: 7px;
+}
+
+#date, #time {
+    width: 217px;
+}
+
+#candidates {
+    width: 880px;
+}
+
+
+
+#download div {
+    display: inline-block;
+}
+
+
+#buffer,#edit,#statusdate {
+    width: 290px;
+    float: left;
+    padding: 10px;
+}
+
+#statusdate span{
+    padding: 5px;
+}
+
+body {
+    background-size:cover;
+    background-position:top center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+}
+
+.logimg {
+    position: absolute;
+    width: 200px;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.4;                      
+}
+
+.logimg:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.branch {
+    margin: 0 7px 0 0;
+}
+
+.sign {
+    margin: 0 auto;
+    text-align: center;
+    color: #fafafa;
+    margin: 5px 0 0 0;
+}
+.sign:hover {
+    color: #337ab7;/*#ffdbb3;*/
+    cursor: pointer;
+}
+
+.phonenumber {
+    width: 150px;
+    float: left;
+    margin-top: 20px;
+    padding-right: 5px;
+}
+
+.searchbtn {
+    margin: 20px 20px 0 7px;
+}
+
+.downloadbtn {
+    margin: 15px 20px 0 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.bigfont {
+    font-size: 20px;
+    margin: 0;
+}
+
+.bigfont22{
+    font-size: 22px;
+    margin: 0;
+}
+
+.choose {
+    margin-right: 30px;
+}
+
+.badge {
+    margin-left: 4px;
+}
+
+.fillBlue {
+    background-color: #337ab7;
+}
+
+.fillRed {
+    background-color: #d9534f;
+}
+
+td tr {
+    text-align: center;
+    height: 30px;
+}
+
+#reason, #noteToStatus {
+    display: none;
+}
+
+.bigfontsize {
+    font-size: 1.8em;
+    text-align: center;
+}
+
+#changedStatus {
+    display: none;
+}
+
+.centered {
+    text-align: center;
+}

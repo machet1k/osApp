@@ -1,0 +1,32 @@
+.section .selection {
+  margin: 0;
+  padding: 0;
+}
+
+.section .selection label {
+  display: inline-block;
+  width:150px;
+  background-color: #f2ddae;
+  border-radius: 6px;
+  color: #966e16;
+  padding:3px;
+  margin: 1px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.section .selection label:hover {
+  background-color: #fff6e2;
+}
+
+.section .selection input[type=radio] {
+  display: none;
+}
+
+.section .selection input[type=radio]:checked ~ label {
+  background-color: #ffcc5b;
+}
+
+.section {
+    float: left;
+}
