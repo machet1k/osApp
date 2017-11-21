@@ -12,7 +12,7 @@ public class Download extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- 
+
         String query, from, to, city, type;
 
         from = request.getParameter("from");
@@ -23,8 +23,8 @@ public class Download extends AbstractServlet {
         if (from != null && !"null".equals(from)) request.getSession().setAttribute("from", from);
         if (to != null && !"null".equals(to)) request.getSession().setAttribute("to", to);
         
-        query = "select * from calls where regtime >= '" 
-                + from + " 00:00:00.000' and regtime <= '" + to + " 23:59:59.999'";
+        query = "select * from calls where date(regtime) >= '" 
+                + from + "' and date(regtime) <= '" + to + "'";
         
         if (city != null && !"null".equals(city)) {
             request.getSession().setAttribute("city", city);

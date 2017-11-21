@@ -1,3 +1,9 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.lang.String"%>
+<%@page import="java.lang.String"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="com.os.web.Authentication"%>
@@ -26,11 +32,14 @@
     </head>
     <body>
 
-        <%
-            // параметры для подключения к базе данных hrdb
+        <%  // параметры для подключения к базе данных hrdb           
             String url = "jdbc:derby://localhost:1527/osdb";
             String username = "root";
             String password = "hermes";
+            
+            String from = String.valueOf(session.getAttribute("from"));
+            String to = String.valueOf(session.getAttribute("to"));
+                        
             // получение соединения с БД, расположенной по url, используя username/password     
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
@@ -46,10 +55,10 @@
                         <form action="Download" method="Post">
                             <div>&ensp;</div>
                             <div>Выгрузить с </div>
-                            <% out.print("<div><input type='date' name='from' required value='" + session.getAttribute("from") + "'></div>"); %>
+                            <% out.print("<div><input type='date' name='from' required value='" + from + "'></div>"); %>
 
                             <div>по</div>
-                            <% out.print("<div><input type='date' name='to' required value='" + session.getAttribute("to") + "'></div>"); %>
+                            <% out.print("<div><input type='date' name='to' required value='" + to + "'></div>"); %>
 
                             <div>
                                 <select class="gap-bottom" name="city">
@@ -59,7 +68,7 @@
                                         String null_city = "";
                                         String city = String.valueOf(session.getAttribute("city"));
                                         
-                                        for (int i = 0; i < arrCity.length; i++) arrCity[i] = ""; 
+                                        for (int z = 0; z < arrCity.length; z++) arrCity[z] = ""; 
                                         
                                         if ("Санкт-Петербург".equals(city))     { arrCity[0] = "selected";}
                                         else if ("Москва".equals(city))         { arrCity[1] = "selected";}
@@ -92,7 +101,7 @@
                                         String null_type = "";
                                         String type = String.valueOf(session.getAttribute("type"));
                                         
-                                        for (int i = 0; i < arrType.length; i++) arrType[i] = ""; 
+                                        for (int z = 0; z < arrType.length; z++) arrType[z] = ""; 
                                         
                                         if ("Заказ".equals(type))               { arrType[0] = "selected";}
                                         else if ("Консультация".equals(type))         { arrType[1] = "selected";}
@@ -161,16 +170,89 @@
                                         + "<td>" + rs.getString(2) + "</td>"
                                         + "<td>" + rs.getString(3) + "</td>"
                                         + "<td>" + rs.getString(4) + "</td>"
-                                        + "<td>" + rs.getString(5) + "</td></tr>" 
+                                        + "<td>" + rs.getString(5) + "</td></tr>"
                                     ); 
                                 }
-                                      
+                                out.print("</table>");
+                            %>
+                    </div>
+                    <div class="panel-heading">Статистика</div>
+                    <div class="panel-body">
+
+<%
+    
+    // Статистика
+    Connection connection1 = DriverManager.getConnection(url, username, password);
+    Statement statement1 = connection1.createStatement();
+    String query1 = "select date(regtime) as date, calls_type, count(*) as count from calls where "
+            + "date(regtime) >= '" + from + "' and date(regtime) <= '" + to + "' and city = '" + request.getParameter("city") + "' "
+            + "group by date(regtime), calls_type "
+            + "order by date(regtime), calls_type";System.out.println(query1);
+    ResultSet rs1 = statement1.executeQuery(query1); 
+
+    String[] arrCitys = {"Санкт-Петербург", "Москва", "Ростов-на-Дону", "Калининград", "Воронеж", "Новосибирск", "Пермь", "Омск"};
+    String[] arrTypes = {"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошибся номером / Не по груз-кам", "Проверка связи", "Сорвался"};
+
+    int lengthOfArrMap = Integer.parseInt(to.substring(8, 10)) - Integer.parseInt(from.substring(8, 10)) + 1;
+    HashMap[] arrMap = new HashMap[lengthOfArrMap];
+    for (int i = 0; i < lengthOfArrMap; i++) {
+        arrMap[i] = new HashMap<String, Integer>();
+    }
+
+    int i = 0;
+    String currentDate = "";
+    String previousDate = "";
+    if (rs1.next()) {
+        currentDate = rs1.getString(1);
+        arrMap[i].put(rs1.getString(2), rs1.getString(3));
+    }
+    while (rs1.next()) {
+        previousDate = currentDate;
+        currentDate = rs1.getString(1);
+        if (!currentDate.equals(previousDate)) {
+            i++;
+        }
+        arrMap[i].put(rs1.getString(2), rs1.getString(3));
+    }
+
+
+
+    out.print("<table><tr><td>Тип</td>");
+    
+    SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat vwFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Date firstDay = dbFormat.parse(from);
+    
+    // 1st line
+    while (lengthOfArrMap-- > 0) {      
+        out.print("<td>" + vwFormat.format(firstDay) + "</td>");
+        firstDay.setDate(firstDay.getDate() + 1);
+    }
+    out.print("</tr>");
+    // data
+    for (int ind = 0; ind < arrTypes.length; ind++) {
+        out.print("<tr><td>" + arrTypes[ind] + "</td>");
+            for (int j = 0; j < arrMap.length; j++) {
+                if (arrMap[j].get(arrTypes[ind]) != null) out.print("<td>" + arrMap[j].get(arrTypes[ind]) + "</td>");
+                else out.print("<td>0</td>");
+            }
+        out.print("</tr>");
+    }
+    out.print("</table>");
+
                                 connection.close();
                                 connection = null;
                                 statement.close();
                                 statement = null;
                                 rs.close();
                                 rs = null;
+
+                                connection1.close();
+                                connection1 = null;
+                                statement1.close();
+                                statement1 = null;
+                                rs1.close();
+                                rs1 = null;
                             %>
                             
                         </table>

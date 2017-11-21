@@ -2,6 +2,8 @@ package com.os.web;
 
 import com.os.core.AbstractServlet;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
@@ -15,6 +17,14 @@ public class Index extends AbstractServlet {
     
     @Override
     protected void doGet(String address) throws ServletException, IOException {
+        
+        SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        String vwToday = dbFormat.format(today);
+        
+        getSession().setAttribute("from", vwToday);
+        getSession().setAttribute("to", vwToday);
+        
         if (!isUserAuthenticated()) redirect("/os/sign-in");
         else {
             getResponse().setHeader("Cache-Control", "no-cache");
