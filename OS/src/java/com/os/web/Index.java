@@ -9,12 +9,7 @@ import javax.servlet.annotation.WebServlet;
 
 @WebServlet("")
 public class Index extends AbstractServlet {
-
-    private boolean isUserAuthenticated() {
-        Object isAuth = getSession().getAttribute("isAuth");
-        return isAuth instanceof Boolean && (Boolean) isAuth;
-    }
-    
+  
     @Override
     protected void doGet(String address) throws ServletException, IOException {
         

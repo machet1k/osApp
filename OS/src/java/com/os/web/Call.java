@@ -29,10 +29,13 @@ public class Call extends AbstractServlet {
 
         System.out.println(query);
         
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();) {
-                statement.executeUpdate(query);
-            } catch (SQLException e) { e.printStackTrace(); }
-        redirect("/os/");
+        if (!isUserAuthenticated()) redirect("/os/sign-in");
+        else {    
+            try (Connection connection = DriverManager.getConnection(url, username, password);
+                Statement statement = connection.createStatement();) {
+                    statement.executeUpdate(query);
+                } catch (SQLException e) { e.printStackTrace(); }
+            redirect("/os/");
+        }
     }
 }

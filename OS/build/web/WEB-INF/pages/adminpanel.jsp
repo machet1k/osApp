@@ -39,6 +39,10 @@
             
             String from = String.valueOf(session.getAttribute("from"));
             String to = String.valueOf(session.getAttribute("to"));
+            String city = String.valueOf(session.getAttribute("city"));
+            
+            SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat vwFormat = new SimpleDateFormat("dd.MM.yyyy");
                         
             // получение соединения с БД, расположенной по url, используя username/password     
             Connection connection = DriverManager.getConnection(url, username, password);
@@ -66,8 +70,7 @@
                                         
                                         String[] arrCity = new String[8]; 
                                         String null_city = "";
-                                        String city = String.valueOf(session.getAttribute("city"));
-                                        
+                                       
                                         for (int z = 0; z < arrCity.length; z++) arrCity[z] = ""; 
                                         
                                         if ("Санкт-Петербург".equals(city))     { arrCity[0] = "selected";}
@@ -184,21 +187,26 @@
     // Статистика
     Connection connection1 = DriverManager.getConnection(url, username, password);
     Statement statement1 = connection1.createStatement();
+ 
     String query1 = "select date(regtime) as date, calls_type, count(*) as count from calls where "
-            + "date(regtime) >= '" + from + "' and date(regtime) <= '" + to + "' and city = '" + request.getParameter("city") + "' "
-            + "group by date(regtime), calls_type "
-            + "order by date(regtime), calls_type";System.out.println(query1);
+            + "date(regtime) >= '" + from + "' and date(regtime) <= '" + to + "' ";
+    if (!"null".equals(city)) query1 += "and city = '" + city + "' ";
+    query1 += "group by date(regtime), calls_type "
+            + "order by date(regtime), calls_type";
+    System.out.println(query1);
     ResultSet rs1 = statement1.executeQuery(query1); 
 
-    String[] arrCitys = {"Санкт-Петербург", "Москва", "Ростов-на-Дону", "Калининград", "Воронеж", "Новосибирск", "Пермь", "Омск"};
+    //String[] arrCitys = {"Санкт-Петербург", "Москва", "Ростов-на-Дону", "Калининград", "Воронеж", "Новосибирск", "Пермь", "Омск"};
     String[] arrTypes = {"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошибся номером / Не по груз-кам", "Проверка связи", "Сорвался"};
-
-    int lengthOfArrMap = Integer.parseInt(to.substring(8, 10)) - Integer.parseInt(from.substring(8, 10)) + 1;
+    
+    // инициализация 
+    int lengthOfArrMap = (int)((dbFormat.parse(to).getTime() - dbFormat.parse(from).getTime()) / (60 * 60 * 24 * 1000)) + 1;
+    
     HashMap[] arrMap = new HashMap[lengthOfArrMap];
-    for (int i = 0; i < lengthOfArrMap; i++) {
-        arrMap[i] = new HashMap<String, Integer>();
-    }
+    
+    for (int i = 0; i < lengthOfArrMap; i++) arrMap[i] = new HashMap<String, Integer>();
 
+    // заполнение
     int i = 0;
     String currentDate = "";
     String previousDate = "";
@@ -219,8 +227,6 @@
 
     out.print("<table><tr><td>Тип</td>");
     
-    SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat vwFormat = new SimpleDateFormat("dd.MM.yyyy");
     Date firstDay = dbFormat.parse(from);
     
     // 1st line

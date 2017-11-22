@@ -69,4 +69,9 @@ public abstract class AbstractServlet extends HttpServlet{
         response.sendRedirect(location);
     }
     
+    protected final boolean isUserAuthenticated() {
+        Object isAuth = getSession().getAttribute("isAuth");
+        return isAuth instanceof Boolean && (Boolean) isAuth;
+    }
+    
 }

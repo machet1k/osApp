@@ -37,6 +37,8 @@ public class Download extends AbstractServlet {
   
         request.getSession().setAttribute("queryForAdminPanel", query);
 
-        forward("/adminpanel.jsp");
+        if (!isUserAuthenticated()) redirect("/os/sign-in");
+        else forward("/adminpanel.jsp");
+        
     }
 }
