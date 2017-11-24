@@ -71,7 +71,7 @@ public class Authentication extends AbstractServlet {
         if (credentials.equals(new Credentials(credentials.getLogin(), passFromDB))) {
             session.setAttribute("isAuth", true);
             session.setAttribute("queryForAdminPanel", "select * from calls where date(regtime) = '2000-01-01'");
-            session.setAttribute("line", credentials.getLogin());
+            session.setAttribute("login", credentials.getLogin());
             session.setAttribute("department", department);
             redirect("/os");
         } else {

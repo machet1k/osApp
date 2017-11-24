@@ -17,7 +17,7 @@ public class Call extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String line = String.valueOf(request.getSession().getAttribute("line"));
+        String login = String.valueOf(request.getSession().getAttribute("login"));
         String city = request.getParameter("city");
         String type = request.getParameter("callsType");
         
@@ -25,7 +25,7 @@ public class Call extends AbstractServlet {
         String username = "root";
         String password = "hermes";
 
-        String query = "insert into calls(line, city, calls_type) values('" + line + "', '" + city + "', '" + type + "')";
+        String query = "insert into calls(line, city, calls_type) values('" + login + "', '" + city + "', '" + type + "')";
 
         System.out.println(query);
         

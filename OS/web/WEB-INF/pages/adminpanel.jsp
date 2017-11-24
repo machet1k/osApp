@@ -38,8 +38,13 @@
             String password = "hermes";
             
             String from = String.valueOf(session.getAttribute("from"));
-            String to = String.valueOf(session.getAttribute("to"));
+            String to   = String.valueOf(session.getAttribute("to"));
+            String line = String.valueOf(session.getAttribute("line"));
+            String surname = String.valueOf(session.getAttribute("surname"));
+            String name = String.valueOf(session.getAttribute("name"));
+            String login = String.valueOf(session.getAttribute("login"));
             String city = String.valueOf(session.getAttribute("city"));
+            String type = String.valueOf(session.getAttribute("type"));
             
             SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat vwFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -49,21 +54,28 @@
             Statement statement = connection.createStatement();
             String query = String.valueOf(request.getSession().getAttribute("queryForAdminPanel"));
             ResultSet rs = statement.executeQuery(query); 
-            System.out.println(">>> " + query);
         %>
 
         <div class="containerDownload">
             <div class="row">
                 <div class="panel panel-default">
                     <div id="download">
-                        <form action="Download" method="Post">
+                        <form action="Download" method="Post" >
                             <div>&ensp;</div>
-                            <div>Выгрузить с </div>
-                            <% out.print("<div><input type='date' name='from' required value='" + from + "'></div>"); %>
-
-                            <div>по</div>
-                            <% out.print("<div><input type='date' name='to' required value='" + to + "'></div>"); %>
-
+                            
+                            <% out.print("<div>Выгрузить с <input type='date' name='from' required value='" + from + "'></div>"); %>
+                            
+                            <% out.print("<div> по <input type='date' name='to' required value='" + to + "'></div>"); %>
+                            
+                            <%
+                                if (!"null".equals(line)) out.print("<div><input type='text' name='line' placeholder='Номер линии' value='" + line + "'></div>");
+                                else out.print("<div><input type='text' name='line' placeholder='Номер линии'></div>");
+                                if (!"null".equals(surname)) out.print("<div><input type='text' name='surname' placeholder='Фамилия' value='" + surname + "'></div>");
+                                else out.print("<div><input type='text' name='surname' placeholder='Фамилия'></div>");
+                                if (!"null".equals(name)) out.print("<div><input type='text' name='name' placeholder='Имя' value='" + name + "'></div>");
+                                else out.print("<div><input type='text' name='name' placeholder='Имя'></div>"); 
+                            %>
+                            
                             <div>
                                 <select class="gap-bottom" name="city">
                                     <%
@@ -120,8 +132,7 @@
                                         
                                         String[] arrType = new String[15]; 
                                         String null_type = "";
-                                        String type = String.valueOf(session.getAttribute("type"));
-                                        
+                                                                                
                                         for (int z = 0; z < arrType.length; z++) arrType[z] = ""; 
                                         
                                         if ("Заказ".equals(type))               { arrType[0] = "selected";}
@@ -168,7 +179,7 @@
                             <div class="downloadbtn">
                                 <button type="submit" class="btn btn-success">Выгрузить</button>
                                 <button class="btn" onclick="this.form.reset();">Очистить</button>
-                                <a href="/os/sign-out">Выход [<% out.print(session.getAttribute("line")); %>]</a>
+                                <a href="/os/sign-out">Выход [<% out.print(login); %>]</a>
                             </div>
                         </form>
                     </div> 
@@ -180,6 +191,8 @@
                                 <td>ID</td>
                                 <td>Время звонка</td>
                                 <td>Номер линии</td>
+                                <td>Фамилия</td>
+                                <td>Имя</td>
                                 <td>Город</td>
                                 <td>Тип звонка</td>
                             </tr>
@@ -191,7 +204,9 @@
                                         + "<td>" + rs.getString(2) + "</td>"
                                         + "<td>" + rs.getString(3) + "</td>"
                                         + "<td>" + rs.getString(4) + "</td>"
-                                        + "<td>" + rs.getString(5) + "</td></tr>"
+                                        + "<td>" + rs.getString(5) + "</td>"
+                                        + "<td>" + rs.getString(6) + "</td>"
+                                        + "<td>" + rs.getString(7) + "</td></tr>"
                                     ); 
                                 }
                                 out.print("</table>");

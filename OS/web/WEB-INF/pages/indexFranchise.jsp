@@ -39,7 +39,7 @@
         <form action="Call" method="post" id="form_id">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="/os/sign-out">Выход [<% out.print(session.getAttribute("line")); %>]</a>
+                    <a href="/os/sign-out">Выход [<% out.print(session.getAttribute("login")); %>]</a>
                 </div>
                 <div class="panel-body scalable">
                     <div class="section">
