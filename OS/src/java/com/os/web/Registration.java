@@ -25,6 +25,7 @@ public class Registration extends AbstractServlet {
         String line = request.getParameter("line");
         String pass = request.getParameter("password");
         String repass = request.getParameter("repassword");
+        String department = request.getParameter("department");
         
         if (!pass.equals(repass)) {
             forward("/differentPasswords.html");
@@ -49,7 +50,7 @@ public class Registration extends AbstractServlet {
                     forward("/isExist.jsp");
                     return;
                 } else {
-                    String query = "insert into users(login, password, email) values('" + line + "', '" + pass + "', '" + email + "')";
+                    String query = "insert into users(login, password, email, department) values('" + line + "', '" + pass + "', '" + email + "', '" + department + "')";
                     statement.executeUpdate(query);
                     forward("/successReg.html");
                 }

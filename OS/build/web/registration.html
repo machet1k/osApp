@@ -18,10 +18,17 @@
             <div class="centered">Вернуться на страницу <b><a href="/os">авторизации</a></b></div>
             <div class="one sixths centered triple-padded">   
                 <form action="Registration" method="post">
-                    <input class="gap-bottom" required="required" type="email" name="email" placeholder="Введите email">
-                    <input class="gap-bottom" required="required" type="text" name="line" placeholder="Введите номер линии">
-                    <input class="gap-bottom" required="required" type="password" name="password" placeholder="Придумайте пароль">
-                    <input class="gap-bottom" required="required" type="password" name="repassword" placeholder="Повторите пароль">
+                    <input class="gap-bottom" required type="email" name="email" placeholder="Введите email">
+                    <input class="gap-bottom" required type="text" name="line" placeholder="Введите номер линии">
+                    <input class="gap-bottom" required type="password" name="password" placeholder="Придумайте пароль">
+                    <input class="gap-bottom" required type="password" name="repassword" placeholder="Повторите пароль">
+                    
+                    <select required class="gap-bottom" name="department">
+                        <option value=''>Выберите подразделение</option>
+                        <option value='Грузовичкоф'>Грузовичкоф</option>
+                        <option value='Франшиза'>Франшиза</option>
+                    </select>
+                    
                     <button class="pull-right asphalt">Зарегистрироваться</button>                 
                 </form>
             </div>

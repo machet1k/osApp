@@ -13,18 +13,21 @@ public class Index extends AbstractServlet {
     @Override
     protected void doGet(String address) throws ServletException, IOException {
         
+        String line = String.valueOf(getSession().getAttribute("line"));
+        String department = String.valueOf(getSession().getAttribute("department"));
+                
         SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
         String vwToday = dbFormat.format(today);
-        
         getSession().setAttribute("from", vwToday);
         getSession().setAttribute("to", vwToday);
         
         if (!isUserAuthenticated()) redirect("/os/sign-in");
         else {
             getResponse().setHeader("Cache-Control", "no-cache");
-            if (getSession().getAttribute("line").equals("admin")) forward("/adminpanel.jsp");
-            else forward("/index.jsp");
+            if (line.equals("admin")) forward("/adminpanel.jsp");
+            else if (department.equals("Грузовичкоф")) forward("/index.jsp");
+            else if (department.equals("Франшиза")) forward("/indexFranchise.jsp");
         }
     }
 }

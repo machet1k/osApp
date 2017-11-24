@@ -52,22 +52,27 @@ public class Authentication extends AbstractServlet {
         String username = "root";
         String password = "hermes";
         String passFromDB = "";
+        String department = "";
         
         Credentials credentials = new Credentials(request);
         
-        String query = "SELECT password FROM users WHERE login = '" + credentials.getLogin() + "'";
+        String query = "SELECT password, department FROM users WHERE login = '" + credentials.getLogin() + "'";
         
         try (Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query)){
-            if (rs.next()) passFromDB = rs.getString(1);
+            if (rs.next()) {
+                passFromDB = rs.getString(1);
+                department = rs.getString(2);
+            }
             else forward("/notFound.html");
         } catch (IOException | ServletException | SQLException e) { e.printStackTrace(); }
         
         if (credentials.equals(new Credentials(credentials.getLogin(), passFromDB))) {
             session.setAttribute("isAuth", true);
-            session.setAttribute("queryForAdminPanel", "select * from calls where regtime = '2000-01-01 00:00:00.000'");
+            session.setAttribute("queryForAdminPanel", "select * from calls where date(regtime) = '2000-01-01'");
             session.setAttribute("line", credentials.getLogin());
+            session.setAttribute("department", department);
             redirect("/os");
         } else {
             System.out.println(credentials.getLogin() + " " + credentials.getPassword());

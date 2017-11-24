@@ -20,7 +20,7 @@
 }
 
 .section .selection input[type=radio] {
-  display: none;
+  float: left;
 }
 
 .section .selection input[type=radio]:checked ~ label {

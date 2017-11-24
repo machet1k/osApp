@@ -68,30 +68,48 @@
                                 <select class="gap-bottom" name="city">
                                     <%
                                         
-                                        String[] arrCity = new String[8]; 
+                                        String[] arrCity = new String[17]; 
                                         String null_city = "";
                                        
                                         for (int z = 0; z < arrCity.length; z++) arrCity[z] = ""; 
                                         
                                         if ("Санкт-Петербург".equals(city))     { arrCity[0] = "selected";}
                                         else if ("Москва".equals(city))         { arrCity[1] = "selected";}
-                                        else if ("Ростов-на-Дону".equals(city)) { arrCity[2] = "selected";}
-                                        else if ("Калининград".equals(city))    { arrCity[3] = "selected";}
-                                        else if ("Воронеж".equals(city))        { arrCity[4] = "selected";}
-                                        else if ("Новосибирск".equals(city))    { arrCity[5] = "selected";}
-                                        else if ("Пермь".equals(city))          { arrCity[6] = "selected";}
-                                        else if ("Омск".equals(city))           { arrCity[7] = "selected";}
+                                        else if ("Воронеж".equals(city))        { arrCity[2] = "selected";}
+                                        else if ("Екатеринбург".equals(city))   { arrCity[3] = "selected";}
+                                        else if ("Иркутск".equals(city))        { arrCity[4] = "selected";}
+                                        else if ("КавМинВоды".equals(city))     { arrCity[5] = "selected";}
+                                        else if ("Калининград".equals(city))    { arrCity[6] = "selected";}
+                                        else if ("Краснодар".equals(city))      { arrCity[7] = "selected";}
+                                        else if ("Красноярск".equals(city))     { arrCity[8] = "selected";}
+                                        else if ("Новосибирск".equals(city))    { arrCity[9] = "selected";}
+                                        else if ("Омск".equals(city))           { arrCity[10] = "selected";}
+                                        else if ("Пермь".equals(city))          { arrCity[11] = "selected";}
+                                        else if ("Петрозаводск".equals(city))   { arrCity[12] = "selected";}
+                                        else if ("Ростов-на-Дону".equals(city)) { arrCity[13] = "selected";}
+                                        else if ("Самара".equals(city))         { arrCity[14] = "selected";}
+                                        else if ("Тула".equals(city))           { arrCity[15] = "selected";}
+                                        else if ("Челябинск".equals(city))      { arrCity[16] = "selected";}
                                         else { null_city = "city";}
                                         out.print(
                                           "<option " + null_city + " value='null'>Все</option>"
                                         + "<option " + arrCity[0] + " value='Санкт-Петербург'>Санкт-Петербург</option>"
                                         + "<option " + arrCity[1] + " value='Москва'>Москва</option>"
-                                        + "<option " + arrCity[2] + " value='Ростов-на-Дону'>Ростов-на-Дону</option>"
-                                        + "<option " + arrCity[3] + " value='Калининград'>Калининград</option>"
-                                        + "<option " + arrCity[4] + " value='Воронеж'>Воронеж</option>"
-                                        + "<option " + arrCity[5] + " value='Новосибирск'>Новосибирск</option>"
-                                        + "<option " + arrCity[6] + " value='Пермь'>Пермь</option>"
-                                        + "<option " + arrCity[7] + " value='Омск'>Омск</option>"); %>
+                                        + "<option " + arrCity[2] + " value='Воронеж'>Воронеж</option>"
+                                        + "<option " + arrCity[3] + " value='Екатеринбург'>Екатеринбург</option>"
+                                        + "<option " + arrCity[4] + " value='Иркутск'>Иркутск</option>"
+                                        + "<option " + arrCity[5] + " value='КавМинВоды'>КавМинВоды</option>"
+                                        + "<option " + arrCity[6] + " value='Калининград'>Калининград</option>"
+                                        + "<option " + arrCity[7] + " value='Краснодар'>Краснодар</option>"
+                                        + "<option " + arrCity[8] + " value='Красноярск'>Красноярск</option>"
+                                        + "<option " + arrCity[9] + " value='Новосибирск'>Новосибирск</option>"
+                                        + "<option " + arrCity[10] + " value='Омск'>Омск</option>"
+                                        + "<option " + arrCity[11] + " value='Пермь'>Пермь</option>"
+                                        + "<option " + arrCity[12] + " value='Петрозаводск'>Петрозаводск</option>"
+                                        + "<option " + arrCity[13] + " value='Ростов-на-Дону'>Ростов-на-Дону</option>"
+                                        + "<option " + arrCity[14] + " value='Самара'>Самара</option>"
+                                        + "<option " + arrCity[15] + " value='Тула'>Тула</option>"
+                                        + "<option " + arrCity[16] + " value='Челябинск'>Челябинск</option>"); %>
                                 </select>
                             </div>
                                 
