@@ -51,6 +51,10 @@ input[type=radio] {
     font: 20pt monospace;
 }
 
+.underheadertext {
+    text-align: center 
+}
+
 align_left {
     float: left;
 }
@@ -66,14 +70,6 @@ align_left {
     font: 800 120px Tahoma;
 }
 
-.bold  {
-    font-weight: 900;
-}
-
-tr td {
-    text-align: center;
-}
-
 .header {
     font-weight: 900;
     font-size: 16px;
@@ -87,60 +83,13 @@ hr {
     clear:both; /* для очистки, если тег идет после float елемента */
 }
 
-#month {
-    font-size: 16px;
-}
-
-.containerIndex .panel-body {
-    height: 670px;
-    overflow: auto;
-    /*background-color: rgba(255, 255, 255, 0.5);
-*/}
-
-.containerIndex {
-    width: 1314px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.containerEdit {
-    width: 900px;
-    margin: 0 auto;
-}
-
 .containerDownload {
-    width: 1800px;
+    width: 1330px;
     margin: 0 auto;
 }
-
-#date, #time, #candidates {
-    float: left;
-    padding: 7px;
-}
-
-#date, #time {
-    width: 217px;
-}
-
-#candidates {
-    width: 880px;
-}
-
-
 
 #download div {
     display: inline-block;
-}
-
-
-#buffer,#edit,#statusdate {
-    width: 290px;
-    float: left;
-    padding: 10px;
-}
-
-#statusdate span{
-    padding: 5px;
 }
 
 body {
@@ -163,32 +112,6 @@ body {
     cursor: pointer;
 }
 
-.branch {
-    margin: 0 7px 0 0;
-}
-
-.sign {
-    margin: 0 auto;
-    text-align: center;
-    color: #fafafa;
-    margin: 5px 0 0 0;
-}
-.sign:hover {
-    color: #337ab7;/*#ffdbb3;*/
-    cursor: pointer;
-}
-
-.phonenumber {
-    width: 150px;
-    float: left;
-    margin-top: 20px;
-    padding-right: 5px;
-}
-
-.searchbtn {
-    margin: 20px 20px 0 7px;
-}
-
 .downloadbtn {
     margin: 15px 20px 0 0;
 }
@@ -197,50 +120,7 @@ body {
     margin: 0;
 }
 
-.bigfont {
-    font-size: 20px;
-    margin: 0;
-}
-
-.bigfont22{
-    font-size: 22px;
-    margin: 0;
-}
-
-.choose {
-    margin-right: 30px;
-}
-
-.badge {
-    margin-left: 4px;
-}
-
-.fillBlue {
-    background-color: #337ab7;
-}
-
-.fillRed {
-    background-color: #d9534f;
-}
-
-td tr {
+tr td {
     text-align: center;
     height: 30px;
-}
-
-#reason, #noteToStatus {
-    display: none;
-}
-
-.bigfontsize {
-    font-size: 1.8em;
-    text-align: center;
-}
-
-#changedStatus {
-    display: none;
-}
-
-.centered {
-    text-align: center;
 }

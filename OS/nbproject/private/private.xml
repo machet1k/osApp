@@ -3,6 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Практика"/>
-        <group/>
+        <group>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Authentication.java</file>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Download.java</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/notFound.html</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/indexFranchise.jsp</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/index.jsp</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/successReg.html</file>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Index.java</file>
+            <file>file:/Z:/github/osApp/OS/web/css/radio.css</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/isExist.jsp</file>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Call.java</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/login.html</file>
+            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/adminpanel.jsp</file>
+            <file>file:/Z:/github/osApp/OS/web/css/style.css</file>
+            <file>file:/Z:/github/osApp/OS/web/registration.html</file>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Registration.java</file>
+        </group>
     </open-files>
 </project-private>

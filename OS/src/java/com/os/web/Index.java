@@ -19,8 +19,8 @@ public class Index extends AbstractServlet {
         SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
         String vwToday = dbFormat.format(today);
-        getSession().setAttribute("from", vwToday);
-        getSession().setAttribute("to", vwToday);
+        getSession().setAttribute("from", vwToday + " 00:00:00");
+        getSession().setAttribute("to", vwToday + " 23:59:59");
         
         if (!isUserAuthenticated()) redirect("/os/sign-in");
         else {

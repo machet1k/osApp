@@ -32,12 +32,7 @@ public class Registration extends AbstractServlet {
         if (!pass.equals(repass)) {
             forward("/differentPasswords.html");
         } else {
-            SENDER.send("Регистрационные данные от Operator's Statistic App", 
-                "Добрый день!"
-              + "\nВы успешно зарегистрировались на сервисе статистики для оператора контакт-центра."
-              + "\nВ качестве логина для входа используйте Ваш номер линии: " + line + ", – и не забудьте Ваш пароль: " + pass, 
-                email);
-            
+
             String url = "jdbc:derby://localhost:1527/osdb";
             String username = "root";
             String password = "hermes";
@@ -51,10 +46,15 @@ public class Registration extends AbstractServlet {
                     request.getSession().setAttribute("email", rs.getString(1));
                     forward("/isExist.jsp");
                     return;
-                } else {
+                } else {  
                     String query = "insert into users(login, password, email, name, surname, department) values('" + line + "', '" + pass + "', '" + email + "', '" + name + "', '" + surname + "', '" + department + "')";
-                    statement.executeUpdate(query);
+                    statement.executeUpdate(query);       
                     forward("/successReg.html");
+                    SENDER.send("Регистрационные данные от Operator's Statistic App", 
+                                "Добрый день!"
+                              + "\nВы успешно зарегистрировались на сервисе статистики для оператора контакт-центра Грузовичкоф."
+                              + "\nВ качестве логина для входа используйте Ваш номер линии: " + line + ", – и Ваш пароль: " + pass, 
+                                email);
                 }
             } catch (IOException | ServletException | SQLException e) { e.printStackTrace(); }
         }

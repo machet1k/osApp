@@ -13,21 +13,21 @@ public class Download extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String query, from, to, city, type, line, surname, name;
+        String query, from, to, city, type, line;
 
-        from = request.getParameter("from");
-        to = request.getParameter("to");
+        from = request.getParameter("from").replace('T', ' ').concat(":00");
+        to = request.getParameter("to").replace('T', ' ').concat(":59");
         city = request.getParameter("city");
         type = request.getParameter("type");
         line = request.getParameter("line");
-        surname = request.getParameter("surname");
-        name = request.getParameter("name");
+        /*surname = request.getParameter("surname");
+        name = request.getParameter("name");*/
 
         if (from != null && !"null".equals(from)) request.getSession().setAttribute("from", from);
         if (to != null && !"null".equals(to)) request.getSession().setAttribute("to", to);
         
-        query = "select calls.id, regtime, line, surname, name, city, calls_type from calls left outer join users on calls.LINE = users.LOGIN where date(regtime) >= '" 
-                + from + "' and date(regtime) <= '" + to + "'";
+        query = "select calls.id, regtime, line, surname, name, city, calls_type from calls left outer join users on calls.LINE = users.LOGIN where regtime >= '" 
+                + from + "' and regtime <= '" + to + "'";
         
         if (city != null && !"null".equals(city)) {
             request.getSession().setAttribute("city", city);
@@ -41,18 +41,17 @@ public class Download extends AbstractServlet {
             request.getSession().setAttribute("line", line);
             query += " and line = '" + line + "'";  
         }
-        if (surname != null && !"".equals(surname)) {
+        /*if (surname != null && !"".equals(surname)) {
             request.getSession().setAttribute("surname", surname);
             query += " and surname = '" + surname + "'";  
         }
         if (name != null && !"".equals(name)) {
             request.getSession().setAttribute("name", name);
             query += " and name = '" + name + "'";  
-        }
+        }*/
         
-  
         request.getSession().setAttribute("queryForAdminPanel", query);
-        System.out.println("Download: " + query);
+        System.out.println("DOWNLOAD: " + query);
         
         if (!isUserAuthenticated()) redirect("/os/sign-in");
         else forward("/adminpanel.jsp");
