@@ -44,11 +44,13 @@
             String from = String.valueOf(session.getAttribute("from"));
             String to = String.valueOf(session.getAttribute("to"));
             String line = String.valueOf(session.getAttribute("line"));
-            /*String surname = String.valueOf(session.getAttribute("surname"));
-            String name = String.valueOf(session.getAttribute("name"));*/
             String login = String.valueOf(session.getAttribute("login"));
             String city = String.valueOf(session.getAttribute("city"));
-            String type = String.valueOf(session.getAttribute("type"));
+            String calls_type = String.valueOf(session.getAttribute("calls_type"));
+
+            String add_func = String.valueOf(session.getAttribute("add_func"));
+            String cost = String.valueOf(session.getAttribute("cost"));
+            String load_capacity = String.valueOf(session.getAttribute("load_capacity"));
 
             SimpleDateFormat dbFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat vwFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -87,91 +89,40 @@
                                 <select class="gap-bottom" name="city">
                                     <%
                                         String[] arrCitySelected = new String[19];
-                                        String null_city = "";
 
                                         for (int z = 0; z < arrCitySelected.length; z++) arrCitySelected[z] = "";
-                                        
-                                        if ("Санкт-Петербург".equals(city)) arrCitySelected[0] = "selected";
-                                        else if ("Москва".equals(city)) arrCitySelected[1] = "selected";
-                                        else if ("Воронеж".equals(city)) arrCitySelected[2] = "selected";
-                                        else if ("Екатеринбург".equals(city)) arrCitySelected[3] = "selected";
-                                        else if ("Иркутск".equals(city)) arrCitySelected[4] = "selected";
-                                        else if ("КавМинВоды".equals(city)) arrCitySelected[5] = "selected";
-                                        else if ("Казань".equals(city)) arrCitySelected[6] = "selected";
-                                        else if ("Калининград".equals(city)) arrCitySelected[7] = "selected";
-                                        else if ("Краснодар".equals(city)) arrCitySelected[8] = "selected";
-                                        else if ("Красноярск".equals(city)) arrCitySelected[9] = "selected";
-                                        else if ("Новосибирск".equals(city)) arrCitySelected[10] = "selected";
-                                        else if ("Омск".equals(city)) arrCitySelected[11] = "selected";
-                                        else if ("Пермь".equals(city)) arrCitySelected[12] = "selected";
-                                        else if ("Петрозаводск".equals(city)) arrCitySelected[13] = "selected";
-                                        else if ("Ростов-на-Дону".equals(city)) arrCitySelected[14] = "selected";
-                                        else if ("Самара".equals(city)) arrCitySelected[15] = "selected";
-                                        else if ("Тула".equals(city)) arrCitySelected[16] = "selected";
-                                        else if ("Уфа".equals(city)) arrCitySelected[17] = "selected"; 
-                                        else if ("Челябинск".equals(city)) arrCitySelected[18] = "selected";
-                                        else null_city = "selected";
-                                        
+
                                         String[] arrCity = {"Санкт-Петербург", "Москва", "Воронеж", "Екатеринбург", "Иркутск", "КавМинВоды", "Казань", "Калининград", "Краснодар", 
                                                             "Красноярск", "Новосибирск", "Омск", "Пермь", "Петрозаводск", "Ростов-на-Дону", "Самара", "Тула", "Уфа", "Челябинск"};
                                         
-                                        out.print("<option " + null_city + " value='null'>Все</option>");
+                                        out.print("<option value='null'>Все</option>");
                                         for (int i = 0; i < arrCity.length; i++) {
+                                            if (arrCity[i].equals(city)) arrCitySelected[i] = "selected";
                                             out.print("<option " + arrCitySelected[i] + " value='" + arrCity[i] + "'>" + arrCity[i] + "</option>");
                                         }
                                     %>
                                 </select>
                             </div>
-
-
-                            <div>Тип звонка
-                                <select class="gap-bottom" name="type">
+                            <div>Функционал
+                                <select class="gap-bottom" name="add_func">
                                     <%
+                                        String[] arrAddFuncSelected = new String[22];
 
-                                        String[] arrTypeSelected = new String[22];
-                                        String null_type = "";
-
-                                        for (int z = 0; z < arrTypeSelected.length; z++) {
-                                            arrTypeSelected[z] = "";
+                                        for (int z = 0; z < arrAddFuncSelected.length; z++) {
+                                            arrAddFuncSelected[z] = "";
                                         }
 
-                                        if ("Заказ".equals(type)) arrTypeSelected[0] = "selected";
-                                        else if ("Заказ с почты".equals(type)) arrTypeSelected[1] = "selected";
-                                        else if ("Заказ с консультации".equals(type)) arrTypeSelected[2] = "selected";
-                                        else if ("Консультация".equals(type)) arrTypeSelected[3] = "selected";
-                                        else if ("Консультация с согласованием".equals(type)) arrTypeSelected[4] = "selected";
-                                        else if ("Дорого".equals(type)) arrTypeSelected[5] = "selected";
-                                        else if ("Корректировка".equals(type)) arrTypeSelected[6] = "selected";
-                                        else if ("Доп.информация".equals(type)) arrTypeSelected[7] = "selected";
-                                        else if ("Опоздание".equals(type)) arrTypeSelected[8] = "selected";
-                                        else if ("Не можем предоставить".equals(type)) arrTypeSelected[9] = "selected";
-                                        else if ("Снятие заказа".equals(type)) arrTypeSelected[10] = "selected";
-                                        else if ("Отдел кадров".equals(type)) arrTypeSelected[11] = "selected";
-                                        else if ("Перевод другому оператору".equals(type)) arrTypeSelected[12] = "selected";
-                                        else if ("Перевод в КО".equals(type)) arrTypeSelected[13] = "selected";
-                                        else if ("Перевод в ОКК / Жалоба".equals(type)) arrTypeSelected[14] = "selected";
-                                        else if ("Ошиблись / Не по груз-кам".equals(type)) arrTypeSelected[15] = "selected";
-                                        else if ("Проверка связи".equals(type)) arrTypeSelected[16] = "selected";
-                                        else if ("Сорвался".equals(type)) arrTypeSelected[17] = "selected";
-                                        else if ("Заказ (квартирный переезд)".equals(type)) arrTypeSelected[18] = "selected";
-                                        else if ("Консульт. (квартирный переезд)".equals(type)) arrTypeSelected[19] = "selected";
-                                        else if ("Заказ (офисный переезд)".equals(type)) arrTypeSelected[20] = "selected";
-                                        else if ("Консульт. (офисный переезд)".equals(type)) arrTypeSelected[21] = "selected";
-                                        else null_type = "selected";
-                                        
-                                        String[] arrCallsType = {"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", 
-                                                    "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", 
-                                                    "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался",
-                                                    "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)"};
-                                        
-                                        out.print("<option " + null_type + " value='null'>Все</option>");
-                                        
-                                        for (int i = 0; i < arrCallsType.length; i++) {
-                                            out.print("<option " + arrTypeSelected[i] + " value='" + arrCallsType[i] + "'>" + arrCallsType[i] + "</option>");
+                                        String[] arrAddFunc = {"Линия", "Большегрузы", "VIP линия", "Эвакуаторы", "Транспортная компания", "Сборный груз", "Чат отдела продаж", "Консультации", "Жалобы"};
+
+                                        out.print("<option value='null'>Все</option>");
+                                        for (int i = 0; i < arrAddFunc.length; i++) {
+                                            if (arrAddFunc[i].equals(add_func)) arrAddFuncSelected[i] = "selected";
+                                            out.print("<option " + arrAddFuncSelected[i] + " value='" + arrAddFunc[i] + "'>" + arrAddFunc[i] + "</option>");
                                         }
                                     %>
                                 </select>
-                            </div>
+                            </div>    
+                                
                             <div class="downloadbtn">
                                 <button type="submit" class="btn btn-success">Выгрузить</button>
                                 <!--button class="btn" onclick="this.form.reset();">Очистить</button-->
@@ -199,10 +150,11 @@
                                 String query1 = "select date(regtime) as date, calls_type, count(*) as count from calls where "
                                         + "regtime >= '" + from + "' and regtime <= '" + to + "' ";
                                 if (!"null".equals(line)) query1 += "and line = '" + line + "' ";
-                                /*if (!"null".equals(surname)) query1 += "and surname = '" + surname + "' ";
-                                if (!"null".equals(name)) query1 += "and name = '" + name + "' ";*/
                                 if (!"null".equals(city)) query1 += "and city = '" + city + "' ";
-                                if (!"null".equals(type)) query1 += "and calls_type = '" + type + "' ";
+                                if (!"null".equals(calls_type)) query1 += "and calls_type = '" + calls_type + "' ";
+                                if (!"null".equals(add_func)) query1 += "and add_func = '" + add_func + "' ";
+                                if (!"null".equals(cost)) query1 += "and cost = '" + cost + "' ";
+                                if (!"null".equals(load_capacity)) query1 += "and load_capacity = '" + load_capacity + "' ";
                                 query1 += "group by date(regtime), calls_type "
                                         + "order by date(regtime), calls_type";
                                 System.out.println(query1);
@@ -250,12 +202,30 @@
                                     firstDay.setDate(firstDay.getDate() + 1);
                                 }
                                 out.print("</tr>");
+                                
+                                Map<String, String[]> mapCallsType = new HashMap<String, String[]>();
+
+                                mapCallsType.put("Линия", new String[]{"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался", "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)"});
+                                mapCallsType.put("Большегрузы", new String[]{"Заказ", "Отказ", "Консультация", "Ждёт звонка", "Нет машин на запрошенное время", "По ПДД не можем предоставить", "Дорого", "Узнавал цену, мониторинг", "Не отвечает", "Уже не актуально", "Просил перезвонить", "Ждёт ответа из ТО"});
+                                mapCallsType.put("VIP линия", new String[]{"Заказ", "Консультация", "Дорого", "Запрос на автобусы", "Запрос на сборный груз", "Запрос на аренду ПУХТО", "Корректировка", "Доп.информация", "Опоздание", "Жалоба", "Не можем предоставить", "Передано другому оператору", "Сорвался", "Перевод в отдел кадров","Перевод в КО", "Перевод в ОКК", "Перевод в такси", "Ошиблись / Не по груз-кам", "Проверка связи"});    
+                                mapCallsType.put("Эвакуаторы", new String[]{"Заказ", "Консультация", "Дорого", "Не можем предоставить", "Передано другому оператору", "Другое"});
+                                mapCallsType.put("Транспортная компания", new String[]{"Заказ", "Консультация", "Дорого", "Запрос на автобусы", "Запрос на сборный груз", "Запрос на аренду ПУХТО", "Корректировка", "Доп.информация", "Опоздание", "Жалоба", "Не можем предоставить", "Передано другому оператору", "Сорвался", "Перевод в отдел кадров","Перевод в КО", "Перевод в ОКК", "Перевод в такси", "Ошиблись / Не по груз-кам", "Проверка связи"});
+                                mapCallsType.put("Сборный груз", new String[]{"Заказ", "Консультация", "Дорого", "Не сборный груз", "Нет ответа", "Нет ответа", "Не сможем предоставить", "Изменение заказа", "Не актуально"});
+                                mapCallsType.put("Чат отдела продаж", new String[]{"Заказ", "Консультация", "Дорого", "Запрос на сборный груз", "Корректировка", "Доп.информация", "Не можем предоставить", "Передано другому оператору", "Другое"});
+                                mapCallsType.put("Консультации", new String[]{"Заказ", "Просил перезвонить", "Уже не интересует", "Не берёт трубку", "Дорого", "Скидка не нужна", "Переехали с нами", "Переехали сами", "Конкуренты", "Сами перезвонят", "Другое"});
+                                mapCallsType.put("Жалобы", new String[]{"Жалоба на оператора", "Жалоба на экипаж", "Опоздание", "Внести изменения в заказ", "Пересчёт", "Неверный тип авто", "Нарушение ПДД", "Не согласен с доп.часами", "Проверка номера телефона", "Не согласен со стоимостью", "Проверка стоимости заказа", "Данные", "Неверная дата", "Заказ с сайта", "Онлайн оплата", "Перегородил дорогу", "Сломался/замена авто", "Порча груза", "Другое"});
+                                mapCallsType.put("null", new String[]{"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался", "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)", "Отказ", "Ждёт звонка", "Нет машин на запрошенное время", "По ПДД не можем предоставить", "Узнавал цену, мониторинг", "Не отвечает", "Уже не актуально", "Просил перезвонить", "Ждёт ответа из ТО", "Запрос на автобусы", "Запрос на сборный груз", "Запрос на аренду ПУХТО", "Жалоба", "Передано другому оператору", "Перевод в отдел кадров", "Перевод в ОКК", "Перевод в такси", "Другое", "Не сборный груз", "Нет ответа", "Не сможем предоставить", "Изменение заказа", "Не актуально", "Уже не интересует", "Не берёт трубку", "Скидка не нужна", "Переехали с нами", "Переехали сами", "Конкуренты", "Сами перезвонят", "Жалоба на оператора", "Жалоба на экипаж", "Внести изменения в заказ", "Пересчёт", "Неверный тип авто", "Нарушение ПДД", "Не согласен с доп.часами", "Проверка номера телефона", "Не согласен со стоимостью", "Проверка стоимости заказа", "Данные", "Неверная дата", "Заказ с сайта", "Онлайн оплата", "Перегородил дорогу", "Сломался/замена авто", "Порча груза"});
                                 // data
-                                for (int ind = 0; ind < arrCallsType.length; ind++) {
-                                    out.print("<tr><td>" + arrCallsType[ind] + "</td>");
+                                /*String[] arrCallsType = {"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", 
+                                                    "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", 
+                                                    "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался",
+                                                    "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)"};*/
+                                
+                                for (int ind = 0; ind < mapCallsType.get(add_func).length; ind++) { // 
+                                    out.print("<tr><td>" + mapCallsType.get(add_func)[ind] + "</td>");
                                     for (int j = 0; j < arrMap.length; j++) {
-                                        if (arrMap[j].get(arrCallsType[ind]) != null) {
-                                            out.print("<td>" + arrMap[j].get(arrCallsType[ind]) + "</td>");
+                                        if (arrMap[j].get(mapCallsType.get(add_func)[ind]) != null) {
+                                            out.print("<td>" + arrMap[j].get(mapCallsType.get(add_func)[ind]) + "</td>");
                                         } else {
                                             out.print("<td>0</td>");
                                         }
@@ -276,6 +246,9 @@
                                     <td>Имя</td>
                                     <td>Город</td>
                                     <td>Тип звонка</td>
+                                    <td>Функционал</td>
+                                    <td>Стоимость заказа</td>
+                                    <td>Грузоподъёмность</td>
                                 </tr>
 
                                 <%  
@@ -287,8 +260,11 @@
                                                 + "<td>" + rs.getString(4) + "</td>"
                                                 + "<td>" + rs.getString(5) + "</td>"
                                                 + "<td>" + rs.getString(6) + "</td>"
-                                                + "<td>" + rs.getString(7) + "</td></tr>"
-                                        );
+                                                + "<td>" + rs.getString(7) + "</td>"
+                                                + "<td>" + rs.getString(8) + "</td>");
+                                        if (rs.getString(9) == null) out.print("<td>–</td>"); else out.print("<td>" + rs.getString(9) + "</td>");
+                                        if (rs.getString(10) == null) out.print("<td>–</td>"); else out.print("<td>" + rs.getString(10) + "</td>");
+                                        out.print("</tr>");
                                     }
 
                                     connection.close();
@@ -306,10 +282,11 @@
                                     rs1 = null;
 
                                     request.getSession().setAttribute("line", null);
-                                    /*request.getSession().setAttribute("name", null);
-                                    request.getSession().setAttribute("surname", null);*/
                                     request.getSession().setAttribute("city", null);
-                                    request.getSession().setAttribute("type", null);
+                                    request.getSession().setAttribute("calls_type", null);
+                                    request.getSession().setAttribute("add_func", null);
+                                    request.getSession().setAttribute("cost", null);
+                                    request.getSession().setAttribute("load_capacity", null);
                                 %>
                             </table>
                         </div>

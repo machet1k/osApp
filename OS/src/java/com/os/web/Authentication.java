@@ -73,6 +73,7 @@ public class Authentication extends AbstractServlet {
             session.setAttribute("queryForAdminPanel", "select * from calls where date(regtime) = '2000-01-01'");
             session.setAttribute("login", credentials.getLogin());
             session.setAttribute("department", department);
+            request.getSession().setAttribute("add_func", "Линия");
             redirect("/os");
         } else {
             System.out.println(credentials.getLogin() + " " + credentials.getPassword());

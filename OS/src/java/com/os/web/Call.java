@@ -16,26 +16,37 @@ public class Call extends AbstractServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String login = String.valueOf(request.getSession().getAttribute("login"));
         String city = request.getParameter("city");
-        String type = request.getParameter("callsType");
+        String type = request.getParameter("callsType");  
+        String add_func = request.getParameter("add_func");
+        String cost = request.getParameter("cost");
+        String load_capacity = request.getParameter("load_capacity"); 
+        request.getSession().setAttribute("add_func", add_func);
         
         String url = "jdbc:derby://localhost:1527/osdb";
         String username = "root";
         String password = "hermes";
 
-        String query = "insert into calls(line, city, calls_type) values('" + login + "', '" + city + "', '" + type + "')";
-
+        String query = "insert into calls(line, city, calls_type, add_func";
+        if (!"".equals(cost) && "Заказ".equals(type)) query += ", cost";
+        if (!"".equals(load_capacity) && "Большегрузы".equals(add_func)) query += ", load_capacity";
+        query += ") values('" + login + "', '" + city + "', '" + type + "', '" + add_func + "'";
+        if (!"".equals(cost) && "Заказ".equals(type)) query += ", " + cost;
+        if (!"".equals(load_capacity) && "Большегрузы".equals(add_func)) query += ", '" + load_capacity + "'"; 
+        query += ")";
         System.out.println(query);
         
         if (!isUserAuthenticated()) redirect("/os/sign-in");
         else {    
-            try (Connection connection = DriverManager.getConnection(url, username, password);
-                Statement statement = connection.createStatement();) {
-                    statement.executeUpdate(query);
-                } catch (SQLException e) { e.printStackTrace(); }
+            try (
+                    Connection connection = DriverManager.getConnection(url, username, password);
+                    Statement statement = connection.createStatement();
+                ) {
+                statement.executeUpdate(query);
+            } catch (SQLException e) { e.printStackTrace(); }
             redirect("/os/");
         }
-    }
+    }   
 }
