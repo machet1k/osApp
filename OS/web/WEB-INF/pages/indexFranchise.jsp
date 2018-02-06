@@ -241,11 +241,27 @@
                             </div>
                             <div>
                                 <select class="gap-bottom" name="load_capacity" id="load_capacity" style="width: 200px; margin: 0 0 0 100px;">
-                                    <option value="">Грузоподъёмность</option>
+                                    <option value="">Выберите тип авто</option>
                                     <option value="3 т.">3 т.</option>
+                                    <option value="3 т. гидроборт">3 т. гидроборт</option>
+                                    <option value="3 т. рефрижератор">3 т. рефрижератор</option>
                                     <option value="5 т.">5 т.</option>
+                                    <option value="5 т. гидроборт">5 т. гидроборт</option>
+                                    <option value="5 т. рефрижератор">5 т. рефрижератор</option>
                                     <option value="10 т.">10 т.</option>
+                                    <option value="10 т. гидроборт">10 т. гидроборт</option>
+                                    <option value="10 т. рефрижератор">10 т. рефрижератор</option>
                                     <option value="20 т.">20 т.</option>
+                                    <option value="20 т. гидроборт">20 т. гидроборт</option>
+                                    <option value="20 т. рефрижератор">20 т. рефрижератор</option>
+                                    <option value="Автокран">Автокран</option>
+                                    <option value="Автовышка">Автовышка</option>
+                                    <option value="Манипулятор">Манипулятор</option>
+                                    <option value="Самосвал">Самосвал</option>
+                                    <option value="Тралл">Тралл</option>
+                                    <option value="Экскаватор-погрузчик">Экскаватор-погрузчик</option>
+                                    <option value="Фронтальный погрузчик">Фронтальный погрузчик</option>
+                                    <option value="Ямобур">Ямобур</option>
                                 </select>
                             </div>   
                         </div>

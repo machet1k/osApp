@@ -1,3 +1,5 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.lang.Integer"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.HashMap"%>
@@ -32,7 +34,6 @@
         <!--link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
         <link rel="icon" type="image/png" href="https://image.ibb.co/foupj6/favicon.png" sizes="16x16">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-
     </head>
     <body>
 
@@ -108,9 +109,7 @@
                                     <%
                                         String[] arrAddFuncSelected = new String[22];
 
-                                        for (int z = 0; z < arrAddFuncSelected.length; z++) {
-                                            arrAddFuncSelected[z] = "";
-                                        }
+                                        for (int z = 0; z < arrAddFuncSelected.length; z++) arrAddFuncSelected[z] = "";
 
                                         String[] arrAddFunc = {"Линия", "Большегрузы", "VIP линия", "Эвакуаторы", "Транспортная компания", "Сборный груз", "Чат отдела продаж", "Консультации", "Жалобы"};
 
@@ -133,17 +132,20 @@
 
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a data-toggle="tab" href="#panel1">Статистика</a>
+                            <a data-toggle="tab" href="#panel1">#1 Типы по датам</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#panel2">Выгрузка</a>
+                            <a data-toggle="tab" href="#panel2">#2 Операторы по типам</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#panel3">#3 Выгрузка из БД</a>
                         </li>
                     </ul>
 
                     <div class="tab-content">
                         <div id="panel1" class="tab-pane fade in active">
                             <%
-                                // Статистика
+                                // #1 Типы по датам
                                 Connection connection1 = DriverManager.getConnection(url, username, password);
                                 Statement statement1 = connection1.createStatement();
 
@@ -192,7 +194,7 @@
                                     arrMap[i].put(rs1.getString(2), rs1.getString(3));
                                 }
 
-                                out.print("<table><tr><td>Тип</td>");
+                                out.print("<table><tr class='bold'><td>Тип</td>");
 
                                 Date firstDay = dbFormat.parse(from);
 
@@ -215,13 +217,8 @@
                                 mapCallsType.put("Консультации", new String[]{"Заказ", "Просил перезвонить", "Уже не интересует", "Не берёт трубку", "Дорого", "Скидка не нужна", "Переехали с нами", "Переехали сами", "Конкуренты", "Сами перезвонят", "Другое"});
                                 mapCallsType.put("Жалобы", new String[]{"Жалоба на оператора", "Жалоба на экипаж", "Опоздание", "Внести изменения в заказ", "Пересчёт", "Неверный тип авто", "Нарушение ПДД", "Не согласен с доп.часами", "Проверка номера телефона", "Не согласен со стоимостью", "Проверка стоимости заказа", "Данные", "Неверная дата", "Заказ с сайта", "Онлайн оплата", "Перегородил дорогу", "Сломался/замена авто", "Порча груза", "Другое"});
                                 mapCallsType.put("null", new String[]{"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался", "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)", "Отказ", "Ждёт звонка", "Нет машин на запрошенное время", "По ПДД не можем предоставить", "Узнавал цену, мониторинг", "Не отвечает", "Уже не актуально", "Просил перезвонить", "Ждёт ответа из ТО", "Запрос на автобусы", "Запрос на сборный груз", "Запрос на аренду ПУХТО", "Жалоба", "Передано другому оператору", "Перевод в отдел кадров", "Перевод в ОКК", "Перевод в такси", "Другое", "Не сборный груз", "Нет ответа", "Не сможем предоставить", "Изменение заказа", "Не актуально", "Уже не интересует", "Не берёт трубку", "Скидка не нужна", "Переехали с нами", "Переехали сами", "Конкуренты", "Сами перезвонят", "Жалоба на оператора", "Жалоба на экипаж", "Внести изменения в заказ", "Пересчёт", "Неверный тип авто", "Нарушение ПДД", "Не согласен с доп.часами", "Проверка номера телефона", "Не согласен со стоимостью", "Проверка стоимости заказа", "Данные", "Неверная дата", "Заказ с сайта", "Онлайн оплата", "Перегородил дорогу", "Сломался/замена авто", "Порча груза"});
-                                // data
-                                /*String[] arrCallsType = {"Заказ", "Заказ с почты", "Заказ с консультации", "Консультация", "Консультация с согласованием", "Дорого", "Корректировка", 
-                                                    "Доп.информация", "Опоздание", "Не можем предоставить", "Снятие заказа", "Отдел кадров", "Перевод другому оператору", 
-                                                    "Перевод в КО", "Перевод в ОКК / Жалоба", "Ошиблись / Не по груз-кам", "Проверка связи", "Сорвался",
-                                                    "Заказ (квартирный переезд)", "Консульт. (квартирный переезд)", "Заказ (офисный переезд)", "Консульт. (офисный переезд)"};*/
-                                
-                                for (int ind = 0; ind < mapCallsType.get(add_func).length; ind++) { // 
+                                // data                               
+                                for (int ind = 0; ind < mapCallsType.get(add_func).length; ind++) {
                                     out.print("<tr><td>" + mapCallsType.get(add_func)[ind] + "</td>");
                                     for (int j = 0; j < arrMap.length; j++) {
                                         if (arrMap[j].get(mapCallsType.get(add_func)[ind]) != null) {
@@ -237,8 +234,71 @@
                             %>
                         </div>
                         <div id="panel2" class="tab-pane fade">
+                            <%
+                                // #2 Операторы по типам
+                                Connection connection2 = DriverManager.getConnection(url, username, password);
+                                Statement statement2 = connection2.createStatement();
+
+                                String query2 = "select line, users.surname, users.name, calls_type, count(*) as count from calls left join users on calls.line = users.login "
+                                        + "where regtime >= '" + from + "' and regtime <= '" + to + "' ";
+                                        if (!"null".equals(city)) query2 += "and city = '" + city + "' ";
+                                        if (!"null".equals(add_func)) query2 += "and add_func = '" + add_func + "' ";
+                                        query2 += "group by line, users.surname, users.name, calls_type order by line";
+                                System.out.println(query2);
+                                ResultSet rs2 = statement2.executeQuery(query2);
+                                
+                                HashMap po_operam = new HashMap<String, HashMap<String, String>>();
+                                /* Обрабатываем первую строку выгрузки:
+                                   000 Иванов Иван Заказ 7
+                                   000 Иванов Иван Консультация 1
+                                   111 Петров Пётр Заказ 5
+                                */
+                                String prevLineName = "";
+                                HashMap type_count = null;
+                                if (rs2.next()) {
+                                    prevLineName = rs2.getString(1) + "</td><td>" + rs2.getString(2) + " " + rs2.getString(3);
+                                    type_count = new HashMap<String, String>();
+                                    type_count.put(rs2.getString(4), rs2.getString(5));
+                                
+                                    // остальные строки 
+                                    while (rs2.next()) {
+                                        String nextLineName = rs2.getString(1) + "</td><td>" + rs2.getString(2) + " " + rs2.getString(3);
+                                        if (nextLineName.equals(prevLineName)) type_count.put(rs2.getString(4), rs2.getString(5));
+                                        else {
+                                            po_operam.put(prevLineName, type_count);   
+                                            type_count = new HashMap<String, String>();
+                                            type_count.put(rs2.getString(4), rs2.getString(5));
+                                        }
+                                        prevLineName = nextLineName;
+                                    }
+                                    po_operam.put(prevLineName, type_count); // добавление последнего оператора
+
+                                    // вывод на экран
+                                    out.print("<table><tr class='bold'><td>№ линии</td><td class='wider'>Фамилия Имя оператора</td>");
+                                    for (int j = 0; j < mapCallsType.get(add_func).length; j++) out.print("<td>" + mapCallsType.get(add_func)[j] + "</td>");
+                                    out.print("</tr>");
+
+                                    Iterator<Map.Entry<String, HashMap<String, String>>> iter = po_operam.entrySet().iterator();
+                                    while (iter.hasNext()) {
+                                        out.print("<tr>");
+                                        Map.Entry<String, HashMap<String, String>> map = iter.next();
+                                        out.print("<td>" + map.getKey() + "</td>");
+                                        for (int j = 0; j < mapCallsType.get(add_func).length; j++) {
+                                            String count = map.getValue().get(mapCallsType.get(add_func)[j]);
+                                            if (count != null) out.print("<td>" + count + "</td>");
+                                            else out.print("<td>0</td>");
+                                        }
+                                        out.print("</tr>");
+                                    }
+                                    out.print("</table>");
+                                } else {
+                                    out.print("<table><tr><td>Нет данных</td></tr></table>");
+                                }
+                            %>
+                        </div>
+                        <div id="panel3" class="tab-pane fade">
                             <table>
-                                <tr>   
+                                <tr class='bold'>   
                                     <td>ID</td>
                                     <td>Время звонка</td>
                                     <td>Номер линии</td>
@@ -248,10 +308,11 @@
                                     <td>Тип звонка</td>
                                     <td>Функционал</td>
                                     <td>Стоимость заказа</td>
-                                    <td>Грузоподъёмность</td>
+                                    <td>Тип автомобиля</td>
                                 </tr>
 
                                 <%  
+                                    // #3 Выгрузка
                                     while (rs.next()) {
                                         out.print("<tr>"
                                                 + "<td>" + rs.getString(1) + "</td>"
@@ -266,21 +327,26 @@
                                         if (rs.getString(10) == null) out.print("<td>–</td>"); else out.print("<td>" + rs.getString(10) + "</td>");
                                         out.print("</tr>");
                                     }
-
+                                    
+                                    // освобождение ресурсов
                                     connection.close();
                                     connection = null;
                                     statement.close();
                                     statement = null;
                                     rs.close();
                                     rs = null;
-
                                     connection1.close();
                                     connection1 = null;
                                     statement1.close();
                                     statement1 = null;
                                     rs1.close();
                                     rs1 = null;
-
+                                    connection2.close();
+                                    connection2 = null;
+                                    statement2.close();
+                                    statement2 = null;
+                                    rs2.close();
+                                    rs2 = null;
                                     request.getSession().setAttribute("line", null);
                                     request.getSession().setAttribute("city", null);
                                     request.getSession().setAttribute("calls_type", null);

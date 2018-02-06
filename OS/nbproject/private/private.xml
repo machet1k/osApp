@@ -11,7 +11,7 @@
             <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/adminpanel.jsp</file>
             <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Download.java</file>
             <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/index.jsp</file>
-            <file>file:/Z:/github/osApp/OS/web/WEB-INF/pages/indexFranchise.jsp</file>
+            <file>file:/Z:/github/osApp/OS/src/java/com/os/core/AbstractServlet.java</file>
             <file>file:/Z:/github/osApp/OS/src/java/com/os/web/Registration.java</file>
         </group>
     </open-files>

@@ -13,12 +13,11 @@ public class Download extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String query, from, to, city, calls_type, line, add_func, cost, load_capacity;
+        String query, from, to, city, line, add_func, cost, load_capacity;
 
         from = request.getParameter("from").replace('T', ' ').concat(":00");
         to = request.getParameter("to").replace('T', ' ').concat(":59");
         city = request.getParameter("city");
-        calls_type = request.getParameter("calls_type");
         line = request.getParameter("line");
         
         add_func = request.getParameter("add_func"); 

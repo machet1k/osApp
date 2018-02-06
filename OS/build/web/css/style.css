@@ -1,6 +1,7 @@
 html, body {
     font-family: monospace;
     background: #fafafa;
+    font-size: 14px;
 }
 
 h3 {
@@ -84,7 +85,7 @@ hr {
 }
 
 .containerDownload {
-    width: 1330px;
+    
     margin: 0 auto;
 }
 
@@ -123,4 +124,14 @@ body {
 tr td {
     text-align: center;
     height: 30px;
+}
+
+.bold td {
+    font-weight: 700;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.wider {
+    white-space: nowrap;
 }
